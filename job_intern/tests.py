@@ -1,0 +1,38 @@
+from django.test import TestCase
+
+from io import BytesIO
+import requests
+
+# 1. Token al
+login_url = "http://localhost:8080/api/token/"
+login_data = {
+    "Username": "salata",
+    "password": "domates321"
+}
+res = requests.post(login_url, json=login_data)
+res.raise_for_status()
+tokens = res.json()
+access_token = tokens["access"]
+
+# 2. Me endpointinden user bilgilerini al
+api_url = "http://localhost:8080/api/intern/announcements/1/end/"
+headers = {"Authorization": f"Bearer {access_token}"}
+res = requests.put(api_url, headers=headers)
+print(res.json())
+# res.raise_for_status()
+# user_data = res.json()
+
+# # 3. Profile_Picture URL’ini al
+# image_url = user_data.get("Profile_Picture")
+# if not image_url:
+#     print("User has no profile picture.")
+# else:
+#     # 4. Image’i indir
+#     img_res = requests.get(image_url)
+#     img_res.raise_for_status()
+#     img_file = BytesIO(img_res.content)
+    
+#     # İsteğe bağlı: kaydetmek
+#     with open("downloaded_profile_picture.jpg", "wb") as f:
+#         f.write(img_file.getbuffer())
+#     print("Profile picture downloaded successfully.")
