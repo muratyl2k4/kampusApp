@@ -4,7 +4,7 @@ from io import BytesIO
 import requests
 
 # 1. Token al
-login_url = "http://localhost:8080/api/token/"
+login_url = "http://127.0.0.1:8080/api/token/"
 login_data = {
     "Username": "salata",
     "password": "domates321"
@@ -15,9 +15,9 @@ tokens = res.json()
 access_token = tokens["access"]
 
 # 2. Me endpointinden user bilgilerini al
-api_url = "http://localhost:8080/api/intern/announcements/1/end/"
+api_url = "http://127.0.0.1:8080/api/intern-announcements/"
 headers = {"Authorization": f"Bearer {access_token}"}
-res = requests.put(api_url, headers=headers)
+res = requests.get(api_url, headers=headers)
 print(res.json())
 # res.raise_for_status()
 # user_data = res.json()

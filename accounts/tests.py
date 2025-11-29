@@ -4,7 +4,7 @@ from io import BytesIO
 import requests
 
 # 1. Token al
-login_url = "https://66dlh155-8080.euw.devtunnels.ms/api/token/"
+login_url = "https://muratyl2k4.pythonanywhere.com/api/token/"
 login_data = {
     "Username": "salata",
     "password": "domates321"
@@ -15,7 +15,7 @@ tokens = res.json()
 access_token = tokens["access"]
 
 # 2. Me endpointinden user bilgilerini al
-api_url = "https://66dlh155-8080.euw.devtunnels.ms/api/accounts/"
+api_url = "https://muratyl2k4.pythonanywhere.com/api/accounts/"
 headers = {"Authorization": f"Bearer {access_token}"}
 res = requests.get(api_url, headers=headers)
 print(res.json())

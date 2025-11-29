@@ -95,5 +95,20 @@ class UserViewSet(viewsets.ModelViewSet):
 
         response = get_related_field(self,serializer_class =EntrySerializer ,related_name='entries' , ErrorName=ErrorName , Error=Error , pk=pk)    
         return response
+    @action(methods=['get'] , detail=True)
+    def entry_likes(self,request,pk):
+        ErrorName = 'EntryLikesNotFound'
+        Error = 'Could not find any entry like for this user?'
+
+        response = get_related_field(self,serializer_class =EntryLikeSerializer ,related_name='likes' , ErrorName=ErrorName , Error=Error , pk=pk)    
+        return response
+    def entry_comments(self,request,pk):
+        ErrorName = 'EntryCommentsNotFound'
+        Error = 'Could not find any entry comment for this user?'
+
+        response = get_related_field(self,serializer_class =EntryCommentSerializer ,related_name='likes' , ErrorName=ErrorName , Error=Error , pk=pk)    
+        return response
+    
+
         
     

@@ -29,6 +29,9 @@ def user_profile_picture_path(instance, filename):
     return f"profile_pictures/user_{instance.id}/{filename}"
 
 class KampusUser(AbstractUser):
+
+    class Meta: 
+        ordering = ['Username']
     username = None
     Username = models.CharField(max_length=20, unique=True , blank= False)
     StudentID = models.CharField(max_length=50,unique=True , blank = False)

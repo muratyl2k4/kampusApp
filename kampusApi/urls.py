@@ -38,16 +38,16 @@ from django.conf.urls.static import static
 router = DefaultRouter()
 router.register(r"accounts", accountViews.UserViewSet, basename="user")
 router.register(r"commerce", commerceViews.ProductViewSet, basename="product")
-router.register(r"commerce/categories", commerceViews.ProductCategoryViewSet, basename="product_category")
+router.register("commerce-categories", commerceViews.ProductCategoryViewSet, basename="product_category")
 router.register(r"communities", communityViews.CommunityViewSet, basename="community")
-router.register(r"communities/announcements", communityViews.CommunityAnnouncementViewSet, basename="community_announcement")
+router.register("communities-announcements", communityViews.CommunityAnnouncementViewSet, basename="community_announcement")
 router.register(r"forum", forumViews.EntryViewSet, basename="forum_entry")
-router.register(r"forum/comments", forumViews.EntryCommentViewSet, basename="forum_comment")
-router.register(r"forum/likes", forumViews.EntryLikeViewSet, basename="forum_like")
+router.register("forum-comments", forumViews.EntryCommentViewSet, basename="forum_comment")
+router.register("forum-likes", forumViews.EntryLikeViewSet, basename="forum_like")
 router.register(r"jobs", jobViews.DiscountViewSet, basename="jobs")
 router.register(r"lfis", LFIViews.ItemViewSet, basename="lfis")
 router.register(r"intern", internViews.InternPlaceViewSet, basename="intern-places")
-router.register(r"intern/announcements", internViews.InternAnnouncementViewSet, basename="intern-announcements")
+router.register("intern-announcements", internViews.InternAnnouncementViewSet, basename="intern_announcements")
 
 
 # The API URLs are now determined automatically by the router.

@@ -31,8 +31,9 @@ class InternPlaceViewSet(viewsets.ModelViewSet):
 
 
 class InternAnnouncementViewSet(viewsets.ModelViewSet):
-    queryset= InternAnnouncement.objects.all()
     serializer_class = InternAnnouncementSerializer
+    queryset=  InternAnnouncement.objects.all()
+
     @action(methods=['put','patch'] , detail=True)
     def end(self,request,pk=None):
         data = {"intern_end" : True}
