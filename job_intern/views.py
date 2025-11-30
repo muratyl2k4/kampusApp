@@ -2,11 +2,11 @@ from rest_framework import viewsets , status
 from rest_framework.response import Response
 from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticated , AllowAny
-from .models import InternPlace , InternAnnouncement
+from .models import InternPlace , InternAnnouncement , InternCategory
 from django.shortcuts import get_object_or_404
 
 from django.http import Http404
-from .serializers import InternPlaceSerializer , InternAnnouncementSerializer
+from .serializers import InternPlaceSerializer , InternAnnouncementSerializer , InternCategorySerializer
 
 from core.helpers import serializer_saver , update_field
 
@@ -25,8 +25,24 @@ class InternPlaceViewSet(viewsets.ModelViewSet):
             return Response({"detail" : {"InternPlaceDoesNotExist" : "Can't find this page?"}} ,status=status.HTTP_404_NOT_FOUND)
 
         return Response(serializer.data)
+    
+class InternCategoryViewSet(viewsets.ModelViewSet):
+    queryset = InternCategory.objects.all()
+    serializer_class = InternCategorySerializer
 
 
+    @action(methods=['get'] , detail=True)
+    def get_internships(self , request , pk=None):
+        try : 
+            data = get_object_or_404(self.serializer_class.Meta.model , pk=pk)
+            data=  data.intern_announcements.all()
+            
+            serializer = InternAnnouncementSerializer(data, many=True)
+        except Http404:
+            
+            return Response({"detail" : {"InternPlaceDoesNotExist" : "Can't find this page?"}} ,status=status.HTTP_404_NOT_FOUND)
+
+        return Response(serializer.data)
     
 
 

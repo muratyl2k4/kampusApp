@@ -17,8 +17,13 @@ internship_time_choices = (('Full-Time' , 'Full-Time'),
 
 def intern_announcement_image_path(instance , filename):
     return f"intern/images/{instance}-{filename}"
+class InternCategory(models.Model):
+    category_name = models.CharField(max_length=120)
 
+    def __str__(self):
+        return self.category_name
 class InternAnnouncement(models.Model):
+    intern_category = models.ForeignKey(InternCategory , on_delete=models.CASCADE , blank=True , null=True , related_name='intern_announcements')
     intern_place = models.ForeignKey(InternPlace , on_delete=models.CASCADE , blank=False , related_name='intern_announcements')
     intern_title = models.CharField(max_length=150 , blank=False)
     intern_image = models.ImageField(upload_to=intern_announcement_image_path , blank=True)
